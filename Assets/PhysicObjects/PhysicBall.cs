@@ -61,4 +61,11 @@ public class PhysicBall : MonoBehaviour
             rigid.AddForce(Vector3.up * 3, ForceMode.Impulse);
         }
     }
+
+    public void Reset()
+    {
+        Vector3 initialPosition = new Vector3(0, 0.4f, 0);
+        //transform.position = Vector3.MoveTowards(transform.position, initialPosition, 1f);
+        transform.position = new Vector3(0, 0.4f, 0);
+    }
 }
