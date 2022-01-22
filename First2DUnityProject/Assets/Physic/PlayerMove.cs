@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Direction Transition
-        //spriteRenderer.flipX = 
+        spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
     }
 
     public void FixedUpdate()
