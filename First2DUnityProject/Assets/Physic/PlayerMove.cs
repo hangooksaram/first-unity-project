@@ -7,10 +7,12 @@ public class PlayerMove : MonoBehaviour
     public float maxSpeed;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
+    Animator animator;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     public void Update()
@@ -22,7 +24,20 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Direction Transition
-        spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+        if (Input.GetButtonUp("Horizontal"))
+        {
+            spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+        }
+
+        // Animation
+        if(rigid.velocity.normalized.x == 0)
+        {
+            animator.SetBool("isWalking", false); 
+        }
+        else
+        {
+            animator.SetBool("isWalking", true);
+        }
     }
 
     public void FixedUpdate()
@@ -40,5 +55,7 @@ public class PlayerMove : MonoBehaviour
         {
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
+
+        Debug.Log(rigid.velocity);
     }
 }

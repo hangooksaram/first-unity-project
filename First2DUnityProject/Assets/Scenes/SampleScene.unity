@@ -1590,7 +1590,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 2
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -1610,7 +1610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dec3009e4b08964ba7e5a24134d9f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 8
 --- !u!61 &1179577014
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1712,7 +1712,7 @@ Animator:
   m_GameObject: {fileID: 1179577011}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f6ba860549bd87c4185fb77736fe54bc, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1840dc0a764b56241a8be2ee73ae0d34, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
