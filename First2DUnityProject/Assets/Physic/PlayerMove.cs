@@ -63,6 +63,13 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
         }
 
-        Debug.Log(rigid.velocity);
+        // Landing Platform
+        Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0));
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1);
+
+        if (rayHit.collider != null)
+        {
+            Debug.Log(rayHit.collider.name);
+        }
     }
 }
