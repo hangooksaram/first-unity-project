@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour
     public void Update()
     {
         // Jump
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !animator.GetBool("isJumping"))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             animator.SetBool("isJumping", true);
@@ -51,9 +51,9 @@ public class PlayerMove : MonoBehaviour
     {
         // Move ( Left Arrow & Right Arrow )
         float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        //float vertical = Input.GetAxisRaw("Vertical");
         rigid.AddForce(Vector2.right * horizontal, ForceMode2D.Impulse);
-        rigid.AddForce(Vector2.up * vertical, ForceMode2D.Impulse);
+        //rigid.AddForce(Vector2.up * vertical, ForceMode2D.Impulse);
         if (rigid.velocity.x > maxSpeed) // Right Max Speed
         {
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
@@ -64,12 +64,19 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Landing Platform
-        Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0));
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1);
-
-        if (rayHit.collider != null)
+        if(rigid.velocity.y < 0)
         {
-            Debug.Log(rayHit.collider.name);
+            Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Block"));
+
+            if (rayHit.collider != null)
+            {
+                if (rayHit.distance < 0.5f)
+                {
+                    Debug.Log(rayHit.collider.name);
+                    animator.SetBool("isJumping", false);
+                }
+            }
         }
     }
 }
