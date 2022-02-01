@@ -73,7 +73,6 @@ public class PlayerMove : MonoBehaviour
             {
                 if (rayHit.distance < 0.5f)
                 {
-                    Debug.Log(rayHit.collider.name);
                     animator.SetBool("isJumping", false);
                 }
             }
