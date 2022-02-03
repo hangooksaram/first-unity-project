@@ -32,7 +32,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Direction Transition
-        if (Input.GetButtonDown("Horizontal"))
+        if (Input.GetButton("Horizontal"))
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         }
@@ -78,4 +78,37 @@ public class PlayerMove : MonoBehaviour
             }
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Monster" || collision.gameObject.tag == "Trap")
+        {
+            OnDamaged(collision.transform.position);
+        }
+    }
+
+    void OnDamaged(Vector2 targetPosition)
+    {
+        // change layer (immortal active)
+        gameObject.layer = 10;
+
+        // change color
+        spriteRenderer.color = new Color(1, 1, 1, 0.5f);
+
+        // reaction
+        int reactDirection = transform.position.x - targetPosition.x > 0 ? 1 : -1;
+        rigid.AddForce(new Vector2(reactDirection, 1) * 7, ForceMode2D.Impulse);
+
+        // animation
+        animator.SetTrigger("doDamaged");
+
+        Invoke("OffDamaged", 1);
+    }
+
+    void OffDamaged()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 1f);
+        gameObject.layer = 9;
+    }
+
 }
