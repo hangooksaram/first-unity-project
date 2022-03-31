@@ -135,3 +135,4 @@ Received Import Request.
   path: Assets/Move/MonsterMove.cs
   artifactKey: Guid(c5ef8839759d4f84fab8940355b192af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Move/MonsterMove.cs using Guid(c5ef8839759d4f84fab8940355b192af) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd4a532a8a5430a52df610524747a6fee') in 0.104632 seconds 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
