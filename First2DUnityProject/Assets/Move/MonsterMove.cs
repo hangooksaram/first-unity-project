@@ -7,6 +7,7 @@ public class MonsterMove : MonoBehaviour
     Rigidbody2D rigid;
     Animator animator;
     SpriteRenderer spriteRenderer;
+    BoxCollider2D monsterBoxCollider;
     public int nextMove;
     public float nextMoveTime = 1f;
 
@@ -15,6 +16,7 @@ public class MonsterMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        monsterBoxCollider = GetComponent<BoxCollider2D>();
         Invoke("Move", nextMoveTime);
     }
 
@@ -59,5 +61,20 @@ public class MonsterMove : MonoBehaviour
         spriteRenderer.flipX = !spriteRenderer.flipX;
         CancelInvoke();
         Invoke("Move", nextMoveTime);
+    }
+
+    public void OnDamaged()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        spriteRenderer.flipY = true;
+        monsterBoxCollider.enabled = false;
+        rigid.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
+        Invoke("DeActive", 5);
+
+    }
+
+    void DeActive()
+    {
+        gameObject.SetActive(false);
     }
 }

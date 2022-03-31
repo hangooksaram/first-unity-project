@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{E5CC6D04-6210-E9CE-98E4-4DF067CD08CA}</ProjectGuid>
+    <ProjectGuid>{B6285E98-1129-62E7-EB6A-61235D29C7AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -56,10 +56,10 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\PhysicObjects\PhysicEventBalls.cs" />
     <Compile Include="Assets\PhysicObjects\PhysicBall.cs" />
     <Compile Include="Assets\MoveAction\MoveAction.cs" />
     <Compile Include="Assets\LifeCycle.cs" />
-    <Compile Include="Assets\PhysicObjects\PhysicEventBalls.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

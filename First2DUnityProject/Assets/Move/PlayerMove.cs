@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator animator;
+    BoxCollider2D playerBoxCollider;
+    MonsterMove monsterMove;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -48,7 +50,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void FixedUpdate()
-    {
+     {
         // Move ( Left Arrow & Right Arrow )
         float horizontal = Input.GetAxisRaw("Horizontal");
         //float vertical = Input.GetAxisRaw("Vertical");
@@ -83,7 +85,23 @@ public class PlayerMove : MonoBehaviour
     {
         if(collision.gameObject.tag == "Monster" || collision.gameObject.tag == "Trap")
         {
-            OnDamaged(collision.transform.position);
+            // Attack
+            if(rigid.velocity.y < 0 && transform.position.y > collision.transform.position.y)
+            {
+                OnAttack(collision.transform);
+            }
+            else
+            {
+                OnDamaged(collision.transform.position);
+            }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Item")
+        {
+            collision.gameObject.SetActive(false);
         }
     }
 
@@ -109,6 +127,13 @@ public class PlayerMove : MonoBehaviour
     {
         spriteRenderer.color = new Color(1, 1, 1, 1f);
         gameObject.layer = 9;
+    }
+
+    public void OnAttack(Transform monster)
+    {
+        MonsterMove monsterMove = monster.GetComponent<MonsterMove>();
+        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+        monsterMove.OnDamaged();
     }
 
 }
